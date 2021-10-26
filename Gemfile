@@ -65,14 +65,19 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
+  # Better rails console
+  gem 'pry-rails'
+end
+
+group :test do
+  # Helpful matchers in rspec
+  gem 'shoulda-matchers'
+
   # Clean database during spec runs
   gem 'database_cleaner'
 
   # Give code coverage metrics
   gem 'simplecov', require: false
-
-  # Better rails console
-  gem 'pry-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
