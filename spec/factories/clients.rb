@@ -19,11 +19,11 @@
 FactoryBot.define do
   factory :client do
     sequence :first_name do |n|
-      "First Name #{n}"
+      "Client First Name #{n}"
     end
 
     sequence :last_name do |n|
-      "Last Name #{n}"
+      "Client Last Name #{n}"
     end
 
     sequence :email do |n|
@@ -31,5 +31,9 @@ FactoryBot.define do
     end
 
     date_of_birth { '17/08/1988' }
+
+    before(:create) do |client|
+      client.address ||= create(:address, addressable: client)
+    end
   end
 end

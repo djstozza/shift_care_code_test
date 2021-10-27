@@ -135,3 +135,6 @@ Rails/SkipsModelValidations:
 
 RSpec/AnyInstance:
   Enabled: false
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
