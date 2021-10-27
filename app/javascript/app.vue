@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <v-app>
+      <router-view/>
+    </v-app>
   </div>
 </template>
 
