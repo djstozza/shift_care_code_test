@@ -4,7 +4,8 @@
 #
 #  id         :bigint           not null, primary key
 #  email      :citext           not null
-#  name       :citext           not null
+#  first_name :citext           not null
+#  last_name  :citext           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
