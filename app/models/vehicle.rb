@@ -33,7 +33,7 @@ class Vehicle < ApplicationRecord
   validate :other_make_presence
 
   enum make: {
-    toyota: 'toyota',
+    toyota: 'Toyota',
     ford: 'Ford',
     holden: 'Holden',
     nissan: 'Nissan',
