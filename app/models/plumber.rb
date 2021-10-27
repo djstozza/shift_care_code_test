@@ -24,4 +24,6 @@ class Plumber < ApplicationRecord
   validates :address, presence: true
   validates :email, :first_name, :last_name, presence: true
   validates :email, uniqueness: true, allow_blank: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  accepts_nested_attributes_for :address
 end
