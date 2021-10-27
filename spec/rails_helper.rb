@@ -9,6 +9,7 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/factory_bot'
 require 'support/database_cleaner'
+require 'support/api_helpers'
 require 'support/shoulda_matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -34,6 +35,11 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
+# Load all classes up front so we get honest coverage reporting
+# Otherwise, there'll only be coverage stats for classes we actually load
+Rails.application.eager_load!
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

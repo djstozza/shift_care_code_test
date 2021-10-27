@@ -138,3 +138,7 @@ RSpec/AnyInstance:
 
 Naming/VariableNumber:
   EnforcedStyle: snake_case
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/services/**/*'
