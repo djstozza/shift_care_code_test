@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
       resources :clients, only: %i[index create update]
       resources :plumbers, only: %i[index create update]
-      resources :jobs, only: %i[index create show update]
+      resources :jobs, only: %i[index create show update] do
+        resource :complete, only: %i[create], module: :jobs
+      end
     end
   end
 end

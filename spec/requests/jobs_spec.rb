@@ -128,12 +128,14 @@ RSpec.describe 'api/jobs', type: :request do
     it 'returns the job' do
       api.get api_job_path(job), params: { format: 'json' }
 
-      a_hash_including(
-        'id' => job.to_param,
-        'client' => a_hash_including(
-          'id' => job.client.to_param,
-        ),
-        'plumbers' => [],
+      expect(api.data).to match(
+        a_hash_including(
+          'id' => job.to_param,
+          'client' => a_hash_including(
+            'id' => job.client.to_param,
+          ),
+          'plumbers' => [],
+        )
       )
     end
 

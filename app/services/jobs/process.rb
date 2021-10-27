@@ -1,12 +1,4 @@
-class Jobs::Process < ApplicationService
-  attr_reader :job,
-              :start_time,
-              :end_time,
-              :client_id,
-              :client,
-              :plumber_ids,
-              :plumbers
-
+class Jobs::Process < Jobs::BaseService
   validates :start_time,
             :end_time,
             :client_id,
@@ -16,15 +8,6 @@ class Jobs::Process < ApplicationService
   validate :valid_times
   validate :valid_client
   validate :valid_plumbers
-  validate :job_still_active
-
-  def initialize(data, job: nil)
-    @job = job || Job.new
-    @start_time = data[:start_time]
-    @end_time = data[:end_time]
-    @client_id = data[:client_id]
-    @plumber_ids = data[:plumber_ids]
-  end
 
   def call
     return unless valid?

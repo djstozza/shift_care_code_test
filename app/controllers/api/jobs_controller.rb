@@ -45,7 +45,7 @@ class Api::JobsController < Api::BaseController
   end
 
   def job
-    Job.find(params[:id])
+    Job.find(params[:job_id] || params[:id])
   end
 
   def serialized_job(job)
