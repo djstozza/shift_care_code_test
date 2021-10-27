@@ -20,6 +20,7 @@ class Client < ApplicationRecord
   include ActionView::Helpers::DateHelper
 
   has_one :address, as: :addressable, dependent: :destroy
+  has_many :jobs
 
   validates :address, presence: true
   validates :email, :first_name, :last_name, :date_of_birth, presence: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_26_212952) do
+ActiveRecord::Schema.define(version: 2021_10_27_011819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -39,6 +39,23 @@ ActiveRecord::Schema.define(version: 2021_10_26_212952) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_clients_on_email", unique: true
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.bigint "client_id"
+    t.boolean "done", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_jobs_on_client_id"
+  end
+
+  create_table "jobs_plumbers", id: false, force: :cascade do |t|
+    t.bigint "plumber_id", null: false
+    t.bigint "job_id", null: false
+    t.index ["job_id"], name: "index_jobs_plumbers_on_job_id"
+    t.index ["plumber_id"], name: "index_jobs_plumbers_on_plumber_id"
   end
 
   create_table "plumbers", force: :cascade do |t|

@@ -27,6 +27,11 @@ FactoryBot.define do
     end
     year { 2020 }
 
+    trait :other do
+      make { 'other' }
+      other_make { 'Delorian' }
+    end
+
     association :plumber
   end
 end

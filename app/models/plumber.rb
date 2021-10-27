@@ -17,6 +17,7 @@
 class Plumber < ApplicationRecord
   has_one :address, as: :addressable, dependent: :destroy
   has_many :vehicles
+  has_and_belongs_to_many :jobs
 
   validates :address, presence: true
   validates :email, :first_name, :last_name, presence: true
