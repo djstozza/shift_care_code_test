@@ -1,10 +1,12 @@
 class Api::BaseController < ApplicationController
   before_action :process_token
+  before_action :set_paper_trail_whodunnit
 
   respond_to :json
 
   include ::ResourceLoading
   include ErrorSerialization
+  include ApplicationHelper
 
   private
 
@@ -38,5 +40,11 @@ class Api::BaseController < ApplicationController
   # check that authenticate_admin has successfully returned @current_admin_id (admin is authenticated)
   def signed_in?
     @current_admin_id.present?
+  end
+
+  def user_for_paper_trail
+    return unless @current_admin_id
+
+    name(current_admin)
   end
 end

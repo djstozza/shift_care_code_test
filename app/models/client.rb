@@ -17,6 +17,7 @@
 #
 
 class Client < ApplicationRecord
+  has_paper_trail
   include ActionView::Helpers::DateHelper
 
   has_one :address, as: :addressable, dependent: :destroy
@@ -25,6 +26,8 @@ class Client < ApplicationRecord
   validates :address, presence: true
   validates :email, :first_name, :last_name, :date_of_birth, presence: true
   validates :email, uniqueness: true, allow_blank: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  accepts_nested_attributes_for :address
 
   def age
     ((Time.current - date_of_birth.to_time) / 1.year.seconds).floor

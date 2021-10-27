@@ -32,6 +32,9 @@ gem 'devise'
 # Decode JSON Web Tokens
 gem 'jwt'
 
+# Tracking changes to models, for auditing or versioning
+gem 'paper_trail'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

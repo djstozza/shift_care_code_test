@@ -15,6 +15,8 @@
 #
 
 class Plumber < ApplicationRecord
+  has_paper_trail
+
   has_one :address, as: :addressable, dependent: :destroy
   has_many :vehicles
   has_and_belongs_to_many :jobs

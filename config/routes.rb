@@ -10,6 +10,8 @@ Rails.application.routes.draw do
         put :update, on: :collection
         patch :update, on: :collection
       end
+
+      resources :clients, only: %i[index create update]
     end
   end
 end
