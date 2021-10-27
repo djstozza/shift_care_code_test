@@ -24,6 +24,15 @@ class Job < ApplicationRecord
   validates :start_time, :end_time, presence: true
   validate :valid_times
 
+  scope :filtered, lambda { |start_time, end_time, plumber_id|
+    includes(:client)
+      .includes(:plumbers)
+      .left_joins(:plumbers)
+      .where('end_time > :start_time AND start_time < :end_time', start_time: start_time, end_time: end_time)
+      .where(':plumber_id IS NULL OR plumbers.id = :plumber_id', plumber_id: plumber_id)
+      .order(start_time: :asc, end_time: :asc)
+  }
+
   private
 
   def valid_times
