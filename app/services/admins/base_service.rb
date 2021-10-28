@@ -26,7 +26,7 @@ class Admins::BaseService < ApplicationService
     @token = JWT.encode(
       {
         id: admin.id,
-        exp: (ENV['SESSION_EXPIRY'].to_i || 120).minutes.from_now.to_i,
+        exp: (120).minutes.from_now.to_i,
       },
       Rails.application.secrets.secret_key_base,
     )

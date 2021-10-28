@@ -55,7 +55,8 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
-import LoginService from '../services/loginService'
+import SessionService from '../services/sessionService'
+import { AUTH_KEY } from '../store'
 
 export default {
   name: 'Login',
@@ -105,13 +106,13 @@ export default {
         success,
         emailErrorsArr = [],
         passwordErrorsArr = []
-      } = await LoginService.attemptLogin(this.email, this.password)
+      } = await SessionService.attemptLogin(this.email, this.password)
 
       this.passwordErrorsArr = passwordErrorsArr
       this.emailErrorsArr = emailErrorsArr
       this.submitting = false
 
-      if (success) this.$router.push('/')
+      if (localStorage.getItem(AUTH_KEY)) this.$router.push('/')
     },
 
     passwordErrors () {

@@ -10,14 +10,13 @@
   Admin.create!(
     first_name: "Admin #{i}",
     last_name: "User #{i}",
-    email: "admin3#{i}@example.com",
+    email: "admin#{i}@example.com",
     password: ENV['DEFAULT_PASSWORD']
   )
 end
 
-
-5.times do |i|
-  Client.create!(
+30.times do |i|
+  client = Client.new(
     first_name: "Client #{i}",
     last_name: "User #{i}",
     email: "client2#{i}@example.com",
@@ -31,66 +30,44 @@ end
       country: 'AUS',
     }
   )
-end
 
-10.times do |i|
-  plumber = Plumber.new(
-    first_name: "Plumber #{i}",
-    last_name: "User #{i}",
-    email: "plumber1#{i}@example.com",
-    address_attributes: {
-      address_line_1: "#{i} Military Rd",
-      suburb: 'Mosman',
-      state: 'NSW',
-      post_code: '2088',
-      country: 'AUS',
-    }
+  client.save!
+
+  start_time = rand(100).hours.from_now.beginning_of_hour
+  end_time = start_time + rand(1..5).hours
+
+  job = Job.new(
+    client: client,
+    start_time: start_time,
+    end_time: end_time
   )
+  job.save!
 
-  plumber.save!
-
-  2.times do |j|
-    plumber.vehicles << Vehicle.create(
-      make: Vehicle.makes.keys[rand(0..5)],
-      model: "Model #{i}",
-      year: Vehicle::MINIMUM_YEAR + i % (Date.current.year - Vehicle::MINIMUM_YEAR),
-      number_plate: "abc#{i}#{j}"
+  rand(1..4).times do |j|
+    plumber = Plumber.new(
+      first_name: "Plumber #{i} #{j}",
+      last_name: "User #{i} #{j}",
+      email: "plumber#{i}@example#{j}.com",
+      address_attributes: {
+        address_line_1: "#{i} #{j} Military Rd",
+        suburb: 'Mosman',
+        state: 'NSW',
+        post_code: '2088',
+        country: 'AUS',
+      }
     )
+
+    plumber.save!
+
+    job.plumbers << plumber
+
+    2.times do |k|
+      plumber.vehicles << Vehicle.create(
+        make: Vehicle.makes.keys[rand(0..5)],
+        model: "Model #{i} #{j} #{k}",
+        year: Vehicle::MINIMUM_YEAR + i % (Date.current.year - Vehicle::MINIMUM_YEAR),
+        number_plate: "abc#{i} #{j} #{k}"
+      )
+    end
   end
 end
-
-
-Job.create(
-  client: Client.first,
-  plumbers: [Plumber.second, Plumber.fifth],
-  start_time: 10.hours.from_now,
-  end_time: 13.hours.from_now
-)
-
-Job.create(
-  client: Client.fourth,
-  plumbers: [Plumber.first],
-  start_time: 1.hour.ago,
-  end_time: 4.hours.from_now
-)
-
-Job.create(
-  client: Client.last,
-  plumbers: [Plumber.third, Plumber.fourth],
-  start_time: 2.hours.from_now,
-  end_time: 5.hours.from_now
-)
-
-Job.create(
-  client: Client.third,
-  plumbers: [Plumber.last],
-  start_time: 4.hours.from_now,
-  end_time: 7.hours.from_now
-)
-
-Job.create(
-  client: Client.fifth,
-  plumbers: [Plumber.second],
-  start_time: 2.hours.from_now,
-  end_time: 6.hours.from_now
-)
