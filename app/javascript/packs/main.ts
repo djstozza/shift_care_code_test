@@ -7,11 +7,13 @@ import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import App from '../app.vue'
 import router from '../router'
+import store from '../store'
 
 Vue.use(Vuetify)
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
+    store,
     vuetify: new Vuetify(),
     router: router,
     render: h => h(App)
