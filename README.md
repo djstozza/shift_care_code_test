@@ -1,24 +1,32 @@
-# README
+# ShiftCare Code Test
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## General Info
+A scheduling app that allows admins to schedule jobs for plumbers on behalf of clients.
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+### Prerequisites
+- Ruby 2.7.2
+- Postgres
+- yarn
 
-* System dependencies
+### Setup
+#### Create and migrate the database
+```
+bin/setup
+```
 
-* Configuration
+### Install yarn packages
+```
+yarn install
+```
 
-* Database creation
+#### Run the server
+```
+rails s
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Run the webpack dev server (in a separate terminal)
+```
+bin/webpack-dev-server
+```
