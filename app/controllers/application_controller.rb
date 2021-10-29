@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
 
   # Avoid having an empty view file.
   def index
-    render inline: ''
   end
 
   private
